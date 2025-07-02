@@ -9,7 +9,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v3
 
       - name: Setup Node
@@ -17,14 +17,16 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Install Dependencies
+      - name: Install dependencies
         run: npm install
 
-      - name: Build
+      - name: Build the app
         run: npm run build
 
-      - name: Deploy
+      - name: Configure Git and Deploy
         run: |
+          git config --global user.name "tirupdev"
+          git config --global user.email "ulli.tirupataiah@gmail.com"
           npm install -g gh-pages
           npm run deploy
         env:
